@@ -1,5 +1,5 @@
 import * as AWS from 'aws-sdk'
-import * as AWSXRay from 'aws-xray-sdk'
+const AWSXRay = require('aws-xray-sdk')
 import { DocumentClient } from 'aws-sdk/clients/dynamodb'
 
 const XAWS = AWSXRay.captureAWS(AWS)
@@ -50,18 +50,23 @@ export class TodoAccess {
   }
 
   async updateAttachmentUrl(todoId: string, attachmentUrl: string) {
-    return await this.docClient
-      .update({
-        TableName: this.todosTable,
-        Key: {
-          todoId
-        },
-        UpdateExpression: 'set attachmentUrl = :attachmentUrl',
-        ExpressionAttributeValues: {
-          ':attachmentUrl': attachmentUrl
-        }
-      })
-      .promise()
+
+    const todo = await this.docClient
+    .update({
+      TableName: this.todosTable,
+      Key: {
+        todoId
+      },
+      UpdateExpression: 'set attachmentUrl = :attachmentUrl',
+      ExpressionAttributeValues: {
+        ':attachmentUrl': attachmentUrl
+      }
+    })
+    .promise()
+
+    console.log(todo);
+    
+    return todo
   }
 
   async getTodos(userId: string): Promise<any> {

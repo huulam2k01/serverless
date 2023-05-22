@@ -18,6 +18,6 @@ export function getUploadUrl(attachmentId: string): string {
   return s3.getSignedUrl('putObject', {
     Bucket: bucketName,
     Key: attachmentId,
-    Expires: urlExpiration
+    Expires: parseInt(urlExpiration) || 300
   })
 }

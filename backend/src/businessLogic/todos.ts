@@ -77,6 +77,9 @@ export async function updateAttachmentUrl(
     throw new Error("User can't change this todo")
   }
 
+  console.log("TODO: ", todo);
+  
+
   await todoAccess.updateAttachmentUrl(todoId, attachmentUrl)
 }
 
