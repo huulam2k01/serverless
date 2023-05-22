@@ -9,10 +9,6 @@ import { UpdateTodoRequest } from '../requests/UpdateTodoRequest'
 
 const todoAccess = new TodoAccess()
 
-export async function getAllTodos(): Promise<TodoItem[]> {
-  return todoAccess.getAllTodos()
-}
-
 export async function createTodo(
   createTodoRequest: CreateTodoRequest,
   userId: string
