@@ -19,6 +19,10 @@ export async function createTodo(
 ): Promise<TodoItem> {
   const itemId = uuid.v4()
 
+  if (!createTodoRequest.name) {
+    throw new Error("Name is required.")
+  }
+
   return await todoAccess.createTodo({
     todoId: itemId,
     userId: userId,
