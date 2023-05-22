@@ -14,19 +14,6 @@ export class TodoAccess {
     private readonly todosByUserIndex = process.env.TODOS_BY_USER_INDEX
   ) {}
 
-  async getAllTodos(): Promise<TodoItem[]> {
-    console.log('Getting all groups')
-
-    const result = await this.docClient
-      .scan({
-        TableName: this.todosTable
-      })
-      .promise()
-
-    const items = result.Items
-    return items as TodoItem[]
-  }
-
   async createTodo(todo: TodoItem): Promise<TodoItem> {
     await this.docClient
       .put({
