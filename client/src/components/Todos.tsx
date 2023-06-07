@@ -47,6 +47,11 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
   onTodoCreate = async (event: React.ChangeEvent<HTMLButtonElement>) => {
     try {
       const dueDate = this.calculateDueDate()
+
+      const stringcheck = this.state.newTodoName
+      if (!stringcheck.trim()) {
+       alert("Todo's name can't be space.")
+      }
       const newTodo = await createTodo(this.props.auth.getIdToken(), {
         name: this.state.newTodoName,
         dueDate
